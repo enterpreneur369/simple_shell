@@ -56,8 +56,9 @@ int main(void)
 			exit(EXIT_SUCCESS);
 		}
 		else
+		{
 			wait(NULL);
-				if (strcmp(toktok[0],exi) == 0)
+			if (strcmp(toktok[0],exi) == 0)
 			{
 				free(toktok);
 				exit(EXIT_SUCCESS);
