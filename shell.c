@@ -15,6 +15,7 @@ int main(void)
 	int ret;
 	char **toktok;
 	char *exi = "exit";
+	char *envi = "env";
 
 	while (ret != EOF)
 	{
@@ -40,6 +41,8 @@ int main(void)
         }
 		if (child == 0)
 		{
+			if (strcmp(toktok[0], envi) == 0)
+				_printenv();
 			if (strcmp(toktok[0],exi) == 0)
 			{
 				free(toktok);
