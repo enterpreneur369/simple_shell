@@ -14,6 +14,7 @@ int main(void)
 	size_t MaxSize = 1024;
 	int ret;
 	char **toktok;
+	char *exi = "exit";
 
 	while (ret != EOF)
 	{
@@ -28,6 +29,11 @@ int main(void)
 		child = fork();
 		if (child == 0)
 		{
+			if (strcmp(toktok[0],exi) == 0)
+			{
+				free(toktok);
+				exit(EXIT_SUCCESS);
+			}
 			if (stat(toktok[0], &st) == 0)
 			{
 				execve(toktok[0], toktok, NULL);
@@ -40,6 +46,11 @@ int main(void)
 		else
 		{
 			wait(NULL);
+				if (strcmp(toktok[0],exi) == 0)
+			{
+				free(toktok);
+				exit(EXIT_SUCCESS);
+			}
 		}
 		free (string);
 	}
