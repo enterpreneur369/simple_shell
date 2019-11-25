@@ -23,10 +23,21 @@ int main(void)
 			exit(98);
 		write(STDOUT_FILENO,"hsh$ ", 5);
 		ret = getline(&string, &MaxSize, stdin);
+		/* Validate Ctrl+D Keyword */
+		if (ret < 0)
+        {
+            write(1, "\n", 1);
+            exit(EXIT_FAILURE);
+        }
 		/* converting in tokens */
 		toktok = tokens(string);
 		/*fork the process */
 		child = fork();
+		if (child == -1)
+        {
+            perror("Error:");
+            return (1);
+        }
 		if (child == 0)
 		{
 			if (strcmp(toktok[0],exi) == 0)
@@ -36,15 +47,15 @@ int main(void)
 			}
 			if (stat(toktok[0], &st) == 0)
 			{
-				execve(toktok[0], toktok, NULL);
+				if (execve(toktok[0], toktok, NULL) == -1);
+					perror("Error:");
 			}
-			else if (stat(toktok[0], &st) == -1);
-			{
+			else if (stat(toktok[0], &st) == -1)
 				_path(toktok);
-			}
+			free (string);
+			exit(EXIT_SUCCESS);
 		}
 		else
-		{
 			wait(NULL);
 				if (strcmp(toktok[0],exi) == 0)
 			{
