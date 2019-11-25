@@ -8,10 +8,11 @@
  */
 int main(void)
 {
+	struct stat st;
 	char *string;
 	pid_t child;
 	size_t MaxSize = 1024;
-	int ret, check;
+	int ret;
 	char **toktok;
 
 	while (ret != EOF)
@@ -27,8 +28,14 @@ int main(void)
 		child = fork();
 		if (child == 0)
 		{
-			if (execve(toktok[0], toktok, NULL) == -1)
-			
+			if (stat(toktok[0], &st) == 0)
+			{
+				execve(toktok[0], toktok, NULL);
+			}
+			else if (stat(toktok[0], &st) == -1);
+			{
+				_path(toktok);
+			}
 		}
 		else
 		{
