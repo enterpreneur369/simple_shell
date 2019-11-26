@@ -15,6 +15,7 @@ int main(void)
 	int ret;
 	char **toktok;
 	char *exi = "exit";
+	char *validate = "\n";
 
 	while (ret != EOF)
 	{
@@ -23,6 +24,10 @@ int main(void)
 			exit(98);
 		write(STDOUT_FILENO,"hsh$ ", 5);
 		ret = getline(&string, &MaxSize, stdin);
+		if (strcmp(string, validate) == 0)
+		{
+			continue;
+		}
 		/* Validate Ctrl+D Keyword */
 		if (ret < 0)
         {
