@@ -21,67 +21,54 @@ int main(void)
 		string = malloc(MaxSize);
 		if (string == NULL)
 			exit(98);
-		write(STDOUT_FILENO,"hsh$ ", 5);
+		write(STDOUT_FILENO, "hsh$ ", 5);
 		ret = getline(&string, &MaxSize, stdin);
 		if (strcmp(string, validate) == 0)
-		{
 			continue;
-		}
 		/* Validate Ctrl+D Keyword */
 		if (ret < 0)
-        {
-            write(1, "\n", 1);
-            exit(EXIT_FAILURE);
-        }
+		{
+			write(1, "\n", 1);
+			exit(EXIT_FAILURE);
+		}
 		/* converting in tokens */
 		toktok = tokens(string);
 		/*fork the process */
 		child = fork();
 		if (child == -1)
-        {
-            perror("Error:");
-            return (1);
-        }
+		{
+			perror("Error:");
+			return (1);
+		}
 		if (child == 0)
 		{
 			if (strcmp(toktok[0], envi) == 0)
 				_printenv();
-			if (strcmp(toktok[0],exi) == 0)
+			if (strcmp(toktok[0], exi) == 0)
 			{
 				free(toktok);
 				exit(EXIT_SUCCESS);
 			}
 			if (stat(toktok[0], &st) == 0)
 			{
-				if (execve(toktok[0], toktok, NULL) == -1);
+				if (execve(toktok[0], toktok, NULL) == -1)
 					perror("Error:");
 			}
 			else if (stat(toktok[0], &st) == -1)
 				_path(toktok);
-			free (string);
+			free(string);
 			exit(EXIT_SUCCESS);
 		}
 		else
 		{
 			wait(NULL);
-			if (strcmp(toktok[0],exi) == 0)
+			if (strcmp(toktok[0], exi) == 0)
 			{
 				free(toktok);
 				exit(EXIT_SUCCESS);
 			}
 		}
-		free (string);
+		free(string);
 	}
-	return(0);
-}
-
-/**
- * handler - function to signal handling
- * @han: Key number to handler
- * Return: Nothing.
- */
-void handler(int han)
-{
-    (void)han;
-    write(1, "\nhsh$ ", 6);
+	return (0);
 }
