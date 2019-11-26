@@ -1,6 +1,6 @@
 #include "shell.h"
-/*
- *
+/**
+ * _free - function to free a double pointer
  *
  *
  */
