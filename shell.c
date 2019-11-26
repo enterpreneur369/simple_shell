@@ -24,6 +24,7 @@ int main(void)
 			exit(98);
 		write(STDOUT_FILENO,"hsh$ ", 5);
 		ret = getline(&string, &MaxSize, stdin);
+		/* validating \n */
 		if (strcmp(string, validate) == 0)
 		{
 			continue;
@@ -47,7 +48,7 @@ int main(void)
 		{
 			if (strcmp(toktok[0],exi) == 0)
 			{
-				free(toktok);
+				_free(toktok);
 				exit(EXIT_SUCCESS);
 			}
 			if (stat(toktok[0], &st) == 0)
@@ -58,6 +59,7 @@ int main(void)
 			else if (stat(toktok[0], &st) == -1)
 				_path(toktok);
 			free (string);
+			_free(toktok);
 			exit(EXIT_SUCCESS);
 		}
 		else
@@ -65,11 +67,12 @@ int main(void)
 			wait(NULL);
 			if (strcmp(toktok[0],exi) == 0)
 			{
-				free(toktok);
+				_free(toktok);
 				exit(EXIT_SUCCESS);
 			}
 		}
 		free (string);
+		_free(toktok);
 	}
 	return(0);
 }
