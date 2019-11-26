@@ -55,7 +55,16 @@ int main(void)
 					perror("Error:");
 			}
 			else if (stat(toktok[0], &st) == -1)
-				_path(toktok);
+			{
+				if (_path(toktok) == -1)
+				{
+					write(1, "hsh: ", 5);
+					write(1, "1: ", 3);
+					write(1, string, strlen(string));
+					write(1, ": ", 2);
+					write(1, "not found\n", 10);
+				}
+			}
 			free(string);
 			exit(EXIT_SUCCESS);
 		}

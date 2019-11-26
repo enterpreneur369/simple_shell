@@ -10,6 +10,7 @@
 #include <signal.h>
 #include <unistd.h>
 
+extern char **environ;
 char **tokens(char *string);
 int _path(char **argv);
 char *_which(char *str1, char *str2);
