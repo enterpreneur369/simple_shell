@@ -23,6 +23,7 @@ int main(void)
 			exit(98);
 		write(STDOUT_FILENO, "hsh$ ", 5);
 		ret = getline(&string, &MaxSize, stdin);
+		/* validating \n */
 		if (strcmp(string, validate) == 0)
 			continue;
 		/* Validate Ctrl+D Keyword */
@@ -46,7 +47,7 @@ int main(void)
 				_printenv();
 			if (strcmp(toktok[0], exi) == 0)
 			{
-				free(toktok);
+				_free(toktok);
 				exit(EXIT_SUCCESS);
 			}
 			if (stat(toktok[0], &st) == 0)
@@ -66,6 +67,7 @@ int main(void)
 				}
 			}
 			free(string);
+			_free(toktok);
 			exit(EXIT_SUCCESS);
 		}
 		else
@@ -73,11 +75,12 @@ int main(void)
 			wait(NULL);
 			if (strcmp(toktok[0], exi) == 0)
 			{
-				free(toktok);
+				_free(toktok);
 				exit(EXIT_SUCCESS);
 			}
 		}
-		free(string);
+		free (string);
+		_free(toktok);
 	}
 	return (0);
 }
