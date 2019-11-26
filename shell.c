@@ -1,10 +1,7 @@
 #include "shell.h"
 /**
- * main -
- *
- *
- *
- *
+ * main - Holberton Shell
+ * Return: 0 on success.
  */
 int main(void)
 {
@@ -18,6 +15,7 @@ int main(void)
 	char *envi = "env";
 	char *validate = "\n";
 
+	signal(SIGINT, handler);
 	while (ret != EOF)
 	{
 		string = malloc(MaxSize);
@@ -75,4 +73,15 @@ int main(void)
 		free (string);
 	}
 	return(0);
+}
+
+/**
+ * handler - function to signal handling
+ * @han: Key number to handler
+ * Return: Nothing.
+ */
+void handler(int han)
+{
+    (void)han;
+    write(1, "\nhsh$ ", 6);
 }

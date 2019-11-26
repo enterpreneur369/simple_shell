@@ -15,4 +15,5 @@ int _path(char **argv);
 char *_which(char *str1, char *str2);
 char *_getenv(const char *name);
 void _printenv(void);
+void handler(int han);
 #endif
