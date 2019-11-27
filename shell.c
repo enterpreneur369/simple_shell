@@ -79,7 +79,7 @@ int main(void)
 				exit(EXIT_SUCCESS);
 			}
 		}
-		free (string);
+		free(string);
 		_free(toktok);
 	}
 	return (0);
