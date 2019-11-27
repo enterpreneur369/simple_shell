@@ -36,7 +36,7 @@ char *_which(char *str1, char *str2)
 	len1 = _strlen(str1);
 	len2 = _strlen(str2);
 
-	newstr = malloc((len1 + len2) + 2);
+	newstr = malloc((len1 + len2) + 1);
 	while (str1[i] != '\0')
 	{
 		newstr[i] = str1[i];
@@ -50,9 +50,8 @@ char *_which(char *str1, char *str2)
 		i++;
 		b++;
 	}
-	newstr[i] = '\0';
+	newstr[i + 1] = '\0';
 	return (newstr);
-	free(newstr);
 }
 
 /**
@@ -64,8 +63,8 @@ char *_which(char *str1, char *str2)
  */
 int _path(char **argv)
 {
-	char *path;
-	char *str;
+	char *path = NULL;
+	char *str = NULL;
 	struct stat st;
 	unsigned int i;
 
@@ -84,9 +83,10 @@ int _path(char **argv)
 		path = strtok(NULL, ":");
 		i++;
 	}
-	execve(argv[0], argv, NULL);
-	write(2, "not found\n", 10);
-	free(path);
+	if (execve(argv[0], argv, NULL) == -1)
+	{
+		write(2, "not found\n", 10);
+	}
 	free(str);
 	_free(argv);
 	return (0);

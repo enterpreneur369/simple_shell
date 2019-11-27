@@ -51,6 +51,11 @@ int _strlen(char *s)
 	}
 	return (c);
 }
+/**
+ * _strdup - duplicates a string
+ * @str: string input
+ * Return: duplicated string
+ */
 char *_strdup(char *str)
 {
 	char *a;

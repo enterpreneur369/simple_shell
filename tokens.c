@@ -20,7 +20,7 @@ char **tokens(char *string)
 		tmp = strtok(NULL, " \n\t");
 	}
 
-	savingtok = malloc((ntok * sizeof(char *) + 1));
+	savingtok = (char **) malloc((ntok * sizeof(char *) + 1));
 	token = strtok(token, " \n\t");
 	while (token != NULL)
 	{
@@ -29,6 +29,7 @@ char **tokens(char *string)
 		token = strtok(NULL, " \n\t");
 	}
 	savingtok[ntok + 1] = '\0';
+
 
 	free(token);
 	return (savingtok);
