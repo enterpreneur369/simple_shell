@@ -5,13 +5,13 @@
  */
 int main(void)
 {
-	char *string;
+	char *string = NULL;
 	pid_t child;
 	size_t MaxSize = 1024;
 	int ret;
-	char **toktok;
-	char *exi = "exit";
-	char *envi = "env";
+	char **toktok = NULL;
+	char *exi = "exit\n";
+	char *envi = "env\n";
 	char *validate = "\n";
 
 	signal(SIGINT, handler);
@@ -23,16 +23,25 @@ int main(void)
 		write(STDOUT_FILENO, "hsh$ ", 5);
 		ret = getline(&string, &MaxSize, stdin);
 		/* validating \n */
-		if (strcmp(string, validate) == 0)
+		if (_strcmp(string, validate) == 0)
 			continue;
 		/* Validate Ctrl+D Keyword */
 		if (ret < 0)
 		{
 			write(1, "\n", 1);
+			free(string);
 			exit(EXIT_FAILURE);
 		}
-		/* converting in tokens */
-		toktok = tokens(string);
+		if (_strcmp(string, envi) == 0)
+		{
+			_printenv();
+			free(string);
+		}
+		else if (_strcmp(string, exi) == 0)
+		{
+			free(string);
+			exit(EXIT_SUCCESS);
+		}
 		/*fork the process */
 		child = fork();
 		if (child == -1)
@@ -42,36 +51,17 @@ int main(void)
 		}
 		if (child == 0)
 		{
-			if (strcmp(toktok[0], envi) == 0)
-			{
-				_printenv();
-				_free(toktok);
-				free(string);
-			}
-			else if (strcmp(toktok[0], exi) == 0)
-			{
-				_free(toktok);
-				free (string);
-				exit(EXIT_SUCCESS);
-			}
-			else
-			{
-				_path(toktok);
-			}
+			toktok = tokens(string);
+			_path(toktok);
+			free(string);
+			_free(toktok);
 			exit(EXIT_SUCCESS);
 		}
 		else
 		{
 			wait(NULL);
-			if (strcmp(toktok[0], exi) == 0)
-			{
-				_free(toktok);
-				free(string);
-				exit(EXIT_SUCCESS);
-			}
+			free (string);
 		}
-		free(string);
-		_free(toktok);
 	}
 	return (0);
 }

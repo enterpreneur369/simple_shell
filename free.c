@@ -10,7 +10,7 @@ void _free(char **string)
 
 	if (string == NULL)
 		return;
-	while (string[i] != NULL)
+	while (string[i])
 	{
 		free(string[i]);
 		i++;
