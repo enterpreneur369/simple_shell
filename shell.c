@@ -26,12 +26,7 @@ int main(void)
 		if (_strcmp(string, validate) == 0)
 			continue;
 		/* Validate Ctrl+D Keyword */
-		if (ret < 0)
-		{
-			write(1, "\n", 1);
-			free(string);
-			exit(EXIT_FAILURE);
-		}
+		ctrl_d(ret, string);
 		if (_strcmp(string, envi) == 0)
 		{
 			_printenv();
@@ -44,24 +39,7 @@ int main(void)
 		}
 		/*fork the process */
 		child = fork();
-		if (child == -1)
-		{
-			perror("Error:");
-			return (1);
-		}
-		if (child == 0)
-		{
-			toktok = tokens(string);
-			_path(toktok);
-			free(string);
-			_free(toktok);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			wait(NULL);
-			free (string);
-		}
+		fork_process(child, string, toktok);
 	}
 	return (0);
 }

@@ -18,6 +18,8 @@ char *_getenv(const char *name);
 void _free(char **str);
 void _printenv(void);
 void handler(int han);
+int ctrl_d(int ret, char *string);
+int fork_process(pid_t child, char *string, char **toktok);
 /* string functions */
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
