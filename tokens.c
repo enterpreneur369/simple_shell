@@ -1,18 +1,17 @@
 #include "shell.h"
 /**
  * tokens - divide the string into tokens
- *
- *
- *
+ * @string: input string saved in getline
+ * Return: pointer to array of tokens
  */
 char **tokens(char *string)
 {
-	char **savingtok;
-	char *token;
+	char **savingtok = NULL;
+	char *token = _strdup(string);
 	int i = 0, ntok = 0;
-	char *tmp;
+	char *tmp = NULL;
 
-	tmp = _strdup(string);
+	tmp = string;
 
 	tmp = strtok(tmp, " \n\t");
 	while (tmp != NULL)
@@ -21,23 +20,16 @@ char **tokens(char *string)
 		tmp = strtok(NULL, " \n\t");
 	}
 
-	savingtok = malloc((_strlen(string) * sizeof(char *)));
-	token = _strdup(string);
+	savingtok = malloc((ntok * sizeof(char *) + 1));
 	token = strtok(token, " \n\t");
-	if (token == NULL)
-	{
-		_free(savingtok);
-		return (NULL);
-	}
 	while (token != NULL)
 	{
 		savingtok[i] = _strdup(token);
 		i++;
 		token = strtok(NULL, " \n\t");
 	}
-		savingtok[ntok] = '\0';
+	savingtok[ntok + 1] = '\0';
 
-		free(tmp);
-		free(token);
+	free(token);
 	return (savingtok);
 }

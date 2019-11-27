@@ -42,16 +42,16 @@ int main(void)
 		}
 		if (child == 0)
 		{
-			if (toktok == NULL)
-			{
-				free (string);
-				exit(EXIT_SUCCESS);
-			}
 			if (strcmp(toktok[0], envi) == 0)
+			{
 				_printenv();
+				_free(toktok);
+				free(string);
+			}
 			else if (strcmp(toktok[0], exi) == 0)
 			{
 				_free(toktok);
+				free (string);
 				exit(EXIT_SUCCESS);
 			}
 			else
@@ -66,6 +66,7 @@ int main(void)
 			if (strcmp(toktok[0], exi) == 0)
 			{
 				_free(toktok);
+				free(string);
 				exit(EXIT_SUCCESS);
 			}
 		}
