@@ -12,7 +12,8 @@ char **tokens(char *string)
 	int i = 0, ntok = 0;
 	char *tmp;
 
-	tmp = strdup(string);
+	tmp = _strdup(string);
+
 	tmp = strtok(tmp, " \n\t");
 	while (tmp != NULL)
 	{
@@ -20,16 +21,21 @@ char **tokens(char *string)
 		tmp = strtok(NULL, " \n\t");
 	}
 
-	savingtok = malloc((ntok * sizeof(char *)) + 1);
-	token = strdup(string);
+	savingtok = malloc((_strlen(string) * sizeof(char *)));
+	token = _strdup(string);
 	token = strtok(token, " \n\t");
+	if (token == NULL)
+	{
+		_free(savingtok);
+		return (NULL);
+	}
 	while (token != NULL)
-		{
-			savingtok[i] = strdup(token);
-			i++;
-			token = strtok(NULL, " \n\t");
-		}
-		savingtok[ntok + 1] = NULL;
+	{
+		savingtok[i] = _strdup(token);
+		i++;
+		token = strtok(NULL, " \n\t");
+	}
+		savingtok[ntok] = '\0';
 
 		free(tmp);
 		free(token);
