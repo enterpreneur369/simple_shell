@@ -5,7 +5,6 @@
  */
 int main(void)
 {
-	struct stat st;
 	char *string;
 	pid_t child;
 	size_t MaxSize = 1024;
@@ -43,31 +42,22 @@ int main(void)
 		}
 		if (child == 0)
 		{
+			if (toktok == NULL)
+			{
+				free (string);
+				exit(EXIT_SUCCESS);
+			}
 			if (strcmp(toktok[0], envi) == 0)
 				_printenv();
-			if (strcmp(toktok[0], exi) == 0)
+			else if (strcmp(toktok[0], exi) == 0)
 			{
 				_free(toktok);
 				exit(EXIT_SUCCESS);
 			}
-			if (stat(toktok[0], &st) == 0)
+			else
 			{
-				if (execve(toktok[0], toktok, NULL) == -1)
-					perror("Error:");
+				_path(toktok);
 			}
-			else if (stat(toktok[0], &st) == -1)
-			{
-				if (_path(toktok) == -1)
-				{
-					write(1, "hsh: ", 5);
-					write(1, "1: ", 3);
-					write(1, string, strlen(string));
-					write(1, ": ", 2);
-					write(1, "not found\n", 10);
-				}
-			}
-			free(string);
-			_free(toktok);
 			exit(EXIT_SUCCESS);
 		}
 		else

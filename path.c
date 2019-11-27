@@ -12,7 +12,7 @@ char *_getenv(const char *name)
 	while (environ[i] != NULL)
 	{
 		ret = strtok(environ[i], "=");
-		if (strcmp(ret, (char *)name) == 0)
+		if (_strcmp(ret, (char *)name) == 0)
 		{
 			ret = strtok(NULL, "\0");
 			break;
@@ -33,8 +33,8 @@ char *_which(char *str1, char *str2)
 	int len1, len2, i = 0, b = 0;
 	char *newstr;
 
-	len1 = strlen(str1);
-	len2 = strlen(str2);
+	len1 = _strlen(str1);
+	len2 = _strlen(str2);
 
 	newstr = malloc((len1 + len2) + 2);
 	while (str1[i] != '\0')
@@ -77,15 +77,17 @@ int _path(char **argv)
 		str = _which(path, argv[0]);
 		if (stat(str, &st) == 0)
 		{
-			argv[0] = malloc(strlen(str) + 1);
-			strcpy(argv[0], str);
+			argv[0] = malloc(_strlen(str) + 1);
+			_strcpy(argv[0], str);
 			break;
 		}
 		path = strtok(NULL, ":");
 		i++;
 	}
-	if (stat(str, &st) == -1)
-		return (-1);
-		execve(argv[0], argv, NULL);
+	execve(argv[0], argv, NULL);
+    write(2, "not found\n", 10);
+    free(path);
+    free(str);
+    _free(argv);
 	return (0);
 }
