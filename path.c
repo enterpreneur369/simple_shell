@@ -85,9 +85,9 @@ int _path(char **argv)
 		i++;
 	}
 	execve(argv[0], argv, NULL);
-    write(2, "not found\n", 10);
-    free(path);
-    free(str);
-    _free(argv);
+	write(2, "not found\n", 10);
+	free(path);
+	free(str);
+	_free(argv);
 	return (0);
 }
