@@ -7,5 +7,5 @@
 void handler(int han)
 {
 	(void)han;
-	write(1, "\nhsh$ ", 6);
+	write(1, "\n#cisfun$ ", 10);
 }

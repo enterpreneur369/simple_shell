@@ -20,10 +20,9 @@ int main(int ac, char **av)
 	signal(SIGINT, handler);
 	while (1)
 	{
-		if (isatty(0) == 1)
-			write(STDOUT_FILENO, "hsh$ ", 5);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "#cisfun$ ", 9);
 		ret = getline(&string, &MaxSize, stdin);
-		/* validating \n */
 		ctrl_d(ret, string);
 		if (_strcmp(string, envi) == 0)
 		{
@@ -31,6 +30,7 @@ int main(int ac, char **av)
 		}
 		if (_strcmp(string, exi) == 0)
 		{
+			free(string);
 			exit(EXIT_SUCCESS);
 		}
 		if (_strcmp(string, validate) == 0)
@@ -40,9 +40,11 @@ int main(int ac, char **av)
 		if (fork_process(child, string, toktok) == -1)
 		{
 			validate_input(&string, av[0], errors);
+			_free(toktok);
 			exit(EXIT_FAILURE);
 		}
 		errors++;
 	}
+	free(string);
 	return (0);
 }
