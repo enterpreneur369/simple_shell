@@ -76,18 +76,14 @@ int _path(char **argv)
 		str = _which(path, argv[0]);
 		if (stat(str, &st) == 0)
 		{
-			argv[0] = malloc(_strlen(str) + 1);
-			_strcpy(argv[0], str);
+			argv[0] = _strdup(str);
 			break;
 		}
 		path = strtok(NULL, ":");
 		i++;
 	}
-	if (execve(argv[0], argv, NULL) == -1)
-	{
-		write(2, "not found\n", 10);
-	}
 	free(str);
-	_free(argv);
+	if (execve(argv[0], argv, NULL) == -1)
+		return (-1);
 	return (0);
 }

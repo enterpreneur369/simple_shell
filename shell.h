@@ -20,6 +20,8 @@ void _printenv(void);
 void handler(int han);
 int ctrl_d(int ret, char *string);
 int fork_process(pid_t child, char *string, char **toktok);
+char *_itoa(size_t nerrors);
+void validate_input(char **string, char *name, int errors);
 /* string functions */
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
