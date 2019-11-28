@@ -9,7 +9,7 @@ hsh \- The Holberton command interpreter (shell)
 .SH DESCRIPTION
 .B  hsh
 is a command language interpreter that executes commands read
-from standard input or from a file. A full manual on docomentation can
+from standard input or from a file. A full manual on documentation can
 be found in the readme file.
 .I hsh
 does not handle any option processing like bash or zsh.
