@@ -63,7 +63,7 @@ hsh$
 
 ## Builtins
 ```bash
-env (this function prints the enviroment)
+env
 ```
 
 ## Authors
