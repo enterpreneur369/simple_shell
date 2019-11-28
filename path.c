@@ -4,7 +4,7 @@
  * @name: environment variable to find
  * Return: Array of PATH line
  */
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
 	int i = 0;
 	char *ret;
@@ -12,7 +12,7 @@ char *_getenv(const char *name)
 	while (environ[i] != NULL)
 	{
 		ret = strtok(environ[i], "=");
-		if (_strcmp(ret, (char *)name) == 0)
+		if (_strcmp(ret,name) == 0)
 		{
 			ret = strtok(NULL, "\0");
 			break;

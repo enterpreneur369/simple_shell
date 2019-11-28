@@ -14,7 +14,7 @@ extern char **environ;
 char **tokens(char *string);
 int _path(char **argv);
 char *_which(char *str1, char *str2);
-char *_getenv(const char *name);
+char *_getenv(char *name);
 void _free(char **str);
 void _printenv(void);
 void handler(int han);

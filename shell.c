@@ -35,7 +35,6 @@ int main(int ac, char **av)
 		}
 		if (_strcmp(string, validate) == 0)
 			continue;
-
 		child = fork();
 		if (fork_process(child, string, toktok) == -1)
 		{
