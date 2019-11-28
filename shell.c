@@ -28,11 +28,9 @@ int main(int ac, char **av)
 		if (_strcmp(string, envi) == 0)
 		{
 			_printenv();
-			free(string);
 		}
 		if (_strcmp(string, exi) == 0)
 		{
-			free(string);
 			exit(EXIT_SUCCESS);
 		}
 		if (_strcmp(string, validate) == 0)
@@ -44,6 +42,7 @@ int main(int ac, char **av)
 			validate_input(&string, av[0], errors);
 			exit(EXIT_FAILURE);
 		}
+		errors++;
 	}
 	return (0);
 }

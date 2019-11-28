@@ -39,17 +39,16 @@ int fork_process(pid_t child, char *string, char **toktok)
 		toktok = tokens(string);
 		if (_path(toktok) == -1)
 		{
-			_free(toktok);
 			return (-1);
 		}
 		else
-			_free(toktok);
 			errors++;
 	}
 	else
 	{
 		wait(NULL);
 	}
+	_free(toktok);
 	return (0);
 }
 /**
