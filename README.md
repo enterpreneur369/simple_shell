@@ -29,7 +29,7 @@ $ git clone https://github.com/felipemontes/simple_shell.git
 To start simple_shell you just need to compile using
 
 ```
-gcc -Wall -Werror   -Wextra -pedantic *.c -o hsh.
+gcc -Wall -Werror   -Wextra -pedantic *.c -o hsh
 ```
 
 ### run
